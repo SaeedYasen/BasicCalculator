@@ -1,54 +1,65 @@
 #include <iostream>
+#include <sstream> // لاستخدام stringstream لتحليل المدخلات
 using namespace std;
 
-void showMenu() {
+void showMenu()
+{
     cout << "=============================" << endl;
     cout << "      Basic Calculator       " << endl;
     cout << "=============================" << endl;
-    cout << "1. Addition (+)" << endl;
-    cout << "2. Subtraction (-)" << endl;
-    cout << "3. Multiplication (*)" << endl;
-    cout << "4. Division (/)" << endl;
-    cout << "5. Exit" << endl;
-    cout << "Enter your choice: ";
+    cout << "Enter your equation (e.g., 5+7 or 8/4)." << endl;
+    cout << "Supported operators: +, -, *, /" << endl;
+    cout << "Type 'exit' to quit." << endl;
+    cout << "=============================" << endl;
 }
 
-int main() {
-    int choice;
+int main()
+{
+    string input;
     double num1, num2;
+    char op;
 
-    do {
-        showMenu();
-        cin >> choice;
+    showMenu();
 
-        if (choice >= 1 && choice <= 4) {
-            cout << "Enter first number: ";
-            cin >> num1;
-            cout << "Enter second number: ";
-            cin >> num2;
+    while (true)
+    {
+        cout << "Enter your equation: ";
+        cin >> input;
 
-            switch (choice) {
-                case 1:
-                    cout << "Result: " << num1 + num2 << endl;
-                    break;
-                case 2:
-                    cout << "Result: " << num1 - num2 << endl;
-                    break;
-                case 3:
-                    cout << "Result: " << num1 * num2 << endl;
-                    break;
-                case 4:
-                    if (num2 != 0)
-                        cout << "Result: " << num1 / num2 << endl;
-                    else
-                        cout << "Error: Division by zero!" << endl;
-                    break;
-            }
-        } else if (choice != 5) {
-            cout << "Invalid choice. Please try again." << endl;
+        // التحقق إذا أراد المستخدم الخروج
+        if (input == "exit")
+        {
+            cout << "Thank you for using the calculator. Goodbye!" << endl;
+            break;
         }
-    } while (choice != 5);
 
-    cout << "Thank you for using the calculator. Goodbye!" << endl;
+        // استخدام stringstream لتحليل المعادلة
+        stringstream ss(input);
+        ss >> num1 >> op >> num2;
+
+        // التحقق من العملية وإجراء الحساب
+        switch (op)
+        {
+        case '+':
+            cout << "Result: " << num1 + num2 << endl;
+            break;
+        case '-':
+            cout << "Result: " << num1 - num2 << endl;
+            break;
+        case '*':
+            cout << "Result: " << num1 * num2 << endl;
+            break;
+        case '/':
+            if (num2 != 0)
+                cout << "Result: " << num1 / num2 << endl;
+            else
+                cout << "Error: Division by zero!" << endl;
+            break;
+        default:
+            cout << "Invalid operator. Please use +, -, *, or /." << endl;
+            break;
+        }
+    }
+
     return 0;
 }
