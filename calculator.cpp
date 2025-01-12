@@ -1,5 +1,5 @@
 #include <iostream>
-#include <sstream> // لاستخدام stringstream لتحليل المدخلات
+#include <sstream> 
 using namespace std;
 
 void showMenu()
@@ -26,18 +26,18 @@ int main()
         cout << "Enter your equation: ";
         cin >> input;
 
-        // التحقق إذا أراد المستخدم الخروج
+       
         if (input == "exit")
         {
             cout << "Thank you for using the calculator. Goodbye!" << endl;
             break;
         }
 
-        // استخدام stringstream لتحليل المعادلة
+       
         stringstream ss(input);
         ss >> num1 >> op >> num2;
 
-        // التحقق من العملية وإجراء الحساب
+       
         switch (op)
         {
         case '+':
